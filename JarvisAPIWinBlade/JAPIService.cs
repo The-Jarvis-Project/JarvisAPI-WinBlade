@@ -109,7 +109,7 @@ namespace Jarvis.API
         /// <param name="x">The first behavior</param>
         /// <param name="y">The second behavior</param>
         /// <returns>The integer priority comparison</returns>
-        public int CompareBehaviors(IBehaviorBase x, IBehaviorBase y)
+        public static int CompareBehaviors(IBehaviorBase x, IBehaviorBase y)
         {
             if (x.Priority < y.Priority) return -1;
             else if (x.Priority > y.Priority) return 1;
