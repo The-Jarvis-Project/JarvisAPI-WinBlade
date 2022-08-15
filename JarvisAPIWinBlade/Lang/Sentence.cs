@@ -10,7 +10,25 @@
         /// </summary>
         public enum Type
         {
-            Statement, Question, Command, Exclamation
+            /// <summary>
+            /// Statement sentence
+            /// </summary>
+            Statement,
+
+            /// <summary>
+            /// Question sentence
+            /// </summary>
+            Question,
+
+            /// <summary>
+            /// Command sentence
+            /// </summary>
+            Command,
+
+            /// <summary>
+            /// Exclamation sentence
+            /// </summary>
+            Exclamation
         }
 
         /// <summary>

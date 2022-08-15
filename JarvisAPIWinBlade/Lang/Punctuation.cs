@@ -10,7 +10,15 @@
         /// </summary>
         public enum Usage
         {
-            Intentional, Accidental
+            /// <summary>
+            /// The punctuation mark is supposed to be here.
+            /// </summary>
+            Intentional,
+
+            /// <summary>
+            /// The punctuation mark isn't supposed to be here.
+            /// </summary>
+            Accidental
         }
 
         /// <summary>
@@ -18,7 +26,20 @@
         /// </summary>
         public enum Location
         {
-            Beginning, Middle, End
+            /// <summary>
+            /// The punctuation is in front of the text.
+            /// </summary>
+            Beginning,
+
+            /// <summary>
+            /// The punctuation is in the text.
+            /// </summary>
+            Middle,
+
+            /// <summary>
+            /// The punctuation is at the end of the text.
+            /// </summary>
+            End
         }
 
         /// <summary>

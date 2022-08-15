@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Jarvis.API
 {
-    public static class FileSystem
+    // Not yet implemented
+    internal static class FileSystem
     {
     }
 }
