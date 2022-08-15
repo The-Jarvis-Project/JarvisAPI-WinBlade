@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisAPIWinBlade", "JarvisAPIWinBlade\JarvisAPIWinBlade.csproj", "{A54DC7CC-B331-424E-BCA6-E07CDFFE692A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITestApp", "APITestApp\APITestApp.csproj", "{AE98D1DA-A8E1-42A9-80CC-5AF3F84DA429}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A54DC7CC-B331-424E-BCA6-E07CDFFE692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54DC7CC-B331-424E-BCA6-E07CDFFE692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54DC7CC-B331-424E-BCA6-E07CDFFE692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54DC7CC-B331-424E-BCA6-E07CDFFE692A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE98D1DA-A8E1-42A9-80CC-5AF3F84DA429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE98D1DA-A8E1-42A9-80CC-5AF3F84DA429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE98D1DA-A8E1-42A9-80CC-5AF3F84DA429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE98D1DA-A8E1-42A9-80CC-5AF3F84DA429}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE985BB3-45B7-42FE-BE4D-982C46463EA9}
+	EndGlobalSection
+EndGlobal
