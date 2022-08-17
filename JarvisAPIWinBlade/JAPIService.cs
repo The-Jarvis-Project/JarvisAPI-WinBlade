@@ -17,6 +17,11 @@ namespace Jarvis.API
         /// </summary>
         public string BladeName { get; private set; }
 
+        /// <summary>
+        /// The nickname of this blade instance.
+        /// </summary>
+        public string BladeNickname { get; private set; }
+
         private const int updateMs = 100, logMs = 90000, webRequestMs = 2000;
         private readonly Timer updateTimer, logTimer, webRequestTimer;
 
@@ -42,12 +47,14 @@ namespace Jarvis.API
         /// Creates a new JAPIService instance and hangs up the current thread,
         /// forcing it to act as the main loop for the behavior system from then on.
         /// </summary>
-        /// <param name="bladeName">The name of the blade instance to create</param>
+        /// <param name="bladeName">The name of the blade instance</param>
+        /// <param name="nickname">The nickname of the blade instance</param>
         /// <param name="startProgram">Whether or not to start the main loop right after creation</param>
-        public JAPIService(string bladeName, bool startProgram)
+        public JAPIService(string bladeName, string nickname, bool startProgram)
         {
             singleton = this;
             BladeName = bladeName;
+            BladeNickname = nickname;
 
             updateBehaviors = new List<IUpdate>();
             webBehaviors = new List<IWebUpdate>();
@@ -278,7 +285,8 @@ namespace Jarvis.API
             /// Posts a blade to the server allowing the Jarvis Service to add it to the list of blades tracked.
             /// </summary>
             /// <returns>An asyncronous task for this function</returns>
-            public static async Task<bool> PostBladeToServer() => await TrySendResponse("--postblade");
+            public static async Task<bool> PostBladeToServer() => 
+                await TrySendResponse("--postblade?" + singleton?.BladeName + "?" + singleton?.BladeNickname);
 
             /// <summary>
             /// Sends a response BladeMsg to the server for the Jarvis Service to process.
