@@ -32,7 +32,8 @@ namespace Jarvis.API
 
         private BladeMsg? request, response;
         private static readonly HttpClient client = new HttpClient();
-        private static readonly string cmdUrl = "https://jarvislinker.azurewebsites.net/api/BladeCommands",
+        private static readonly string 
+            cmdUrl = "https://jarvislinker.azurewebsites.net/api/BladeCommands",
             responseUrl = "https://jarvislinker.azurewebsites.net/api/BladeResponses";
 
         private static JAPIService? singleton;
