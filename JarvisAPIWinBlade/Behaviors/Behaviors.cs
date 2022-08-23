@@ -55,7 +55,7 @@
     public interface IWebUpdate : IBehaviorBase
     {
         /// <summary>
-        /// Called when the request and response are updated (Use JAPIService.WebUpdate() to call manually).
+        /// Called when the command and response are updated (Use JAPIService.WebUpdate() to call manually).
         /// </summary>
         void WebUpdate();
     }

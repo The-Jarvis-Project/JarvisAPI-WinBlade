@@ -13,9 +13,15 @@
         public static async Task<bool> SendResponse(string msg) => await JAPIService.Internal.TrySendResponse(msg);
 
         /// <summary>
-        /// Gets the current blade request if one exists.
+        /// Gets the current blade command if one exists.
         /// </summary>
-        /// <returns>The blade message request or null</returns>
-        public static BladeMsg? Request() => JAPIService.Internal.GetRequest();
+        /// <returns>The blade message command or null</returns>
+        public static BladeMsg? Command() => JAPIService.Internal.GetCmd();
+
+        /// <summary>
+        /// Deletes the current blade command if one exists.
+        /// </summary>
+        /// <returns>An asyncronous function represeting the deletion of the command</returns>
+        public static Task<bool> ConsumeCmd() => JAPIService.Internal.ConsumeCmd();
     }
 }

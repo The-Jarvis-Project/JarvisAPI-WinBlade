@@ -1,5 +1,6 @@
 ﻿using Jarvis.API.Behaviors;
 using Newtonsoft.Json;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Timers;
@@ -35,9 +36,13 @@ namespace Jarvis.API
         private readonly List<string> startNames;
         private readonly List<string> stopNames;
 
-        private BladeMsg? request, response;
+        private BladeMsg? command, response;
         private static readonly HttpClient client = new HttpClient();
-        private static readonly string 
+
+        /// <summary>
+        /// URL for accessing blade messages.
+        /// </summary>
+        public const string 
             cmdUrl = "https://jarvislinker.azurewebsites.net/api/BladeCommands",
             responseUrl = "https://jarvislinker.azurewebsites.net/api/BladeResponses";
 
@@ -200,27 +205,27 @@ namespace Jarvis.API
         public async Task WebUpdateAsync()
         {
             webRequestTimer.Stop();
-            HttpResponseMessage requestMsg = await client.GetAsync(cmdUrl),
+            HttpResponseMessage cmdMsg = await client.GetAsync(cmdUrl),
                 responseMsg = await client.GetAsync(responseUrl);
-            if (requestMsg.IsSuccessStatusCode && responseMsg.IsSuccessStatusCode)
+            if (cmdMsg.IsSuccessStatusCode && responseMsg.IsSuccessStatusCode)
             {
                 try
                 {
-                    request = null;
+                    command = null;
                     response = null;
-                    string requestsJson = await requestMsg.Content.ReadAsStringAsync(),
+                    string cmdsJson = await cmdMsg.Content.ReadAsStringAsync(),
                         responsesJson = await responseMsg.Content.ReadAsStringAsync();
-                    List<BladeMsg>? allBladeRequests =
-                        JsonConvert.DeserializeObject<List<BladeMsg>>(requestsJson);
+                    List<BladeMsg>? allBladeCmds =
+                        JsonConvert.DeserializeObject<List<BladeMsg>>(cmdsJson);
                     List<BladeMsg>? allBladeResponses =
                         JsonConvert.DeserializeObject<List<BladeMsg>>(responsesJson);
-                    if (allBladeRequests != null)
+                    if (allBladeCmds != null)
                     {
-                        foreach (BladeMsg cur in allBladeRequests)
+                        foreach (BladeMsg cur in allBladeCmds)
                         {
                             if (cur.Origin == BladeName)
                             {
-                                request = cur;
+                                command = cur;
                                 break;
                             }
                         }
@@ -247,7 +252,7 @@ namespace Jarvis.API
                         ex.Source + "\n\n" + ex.Data + "\n\n" + ex.StackTrace);
                 }
             }
-            else Log.Info("Web Update Failed\nCode: " + requestMsg.StatusCode.ToString());
+            else Log.Info("Web Update Failed\nCode: " + cmdMsg.StatusCode.ToString());
             webRequestTimer.Start();
         }
 
@@ -322,13 +327,23 @@ namespace Jarvis.API
             }
 
             /// <summary>
-            /// Gets the current request this blade has pending, or null if none is available.
+            /// Gets the current command this blade has pending, or null if none is available.
             /// </summary>
-            /// <returns>The request pending or a null value</returns>
-            public static BladeMsg? GetRequest()
+            /// <returns>The command pending or a null value</returns>
+            public static BladeMsg? GetCmd()
             {
-                if (singleton != null) return singleton.request;
+                if (singleton != null) return singleton.command;
                 return null;
+            }
+
+            /// <summary>
+            /// Consumes (deletes) the current command for this blade.
+            /// </summary>
+            /// <returns>An asyncronous task for this function</returns>
+            public static async Task<bool> ConsumeCmd()
+            {
+                string delUrl = cmdUrl + "/" + singleton?.BladeName;
+                return (await client.DeleteAsync(delUrl)).IsSuccessStatusCode;
             }
         }
     }
