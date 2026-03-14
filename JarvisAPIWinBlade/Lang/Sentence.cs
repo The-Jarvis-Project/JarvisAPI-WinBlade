@@ -81,7 +81,7 @@
 
             string[] split = sentence.Split(Phrase.separators, StringSplitOptions.RemoveEmptyEntries);
             Phrases = new Phrase[split.Length];
-            List<Word> wordList = new List<Word>();
+            List<Word> wordList = [];
             for (int i = 0; i < split.Length; i++)
             {
                 Phrases[i] = new Phrase(split[i]);
@@ -89,7 +89,7 @@
             }
             Words = wordList.ToArray();
 
-            List<Punctuation> punctuationList = new List<Punctuation>();
+            List<Punctuation> punctuationList = [];
             for (int i = 0; i < sentence.Length; i++)
             {
                 for (int p = 0; p < punctuationMarks.Length; p++)

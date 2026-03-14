@@ -42,7 +42,7 @@ namespace Jarvis.API
         /// <summary>
         /// URL for accessing blade messages.
         /// </summary>
-        public const string 
+        public readonly string 
             cmdUrl = "https://jarvislinker.azurewebsites.net/api/BladeCommands",
             responseUrl = "https://jarvislinker.azurewebsites.net/api/BladeResponses";
 
@@ -61,15 +61,15 @@ namespace Jarvis.API
             BladeName = bladeName;
             BladeNickname = nickname;
 
-            updateBehaviors = new List<IUpdate>();
-            webBehaviors = new List<IWebUpdate>();
-            startBehaviors = new List<IStart>();
-            stopBehaviors = new List<IStop>();
+            updateBehaviors = [];
+            webBehaviors = [];
+            startBehaviors = [];
+            stopBehaviors = [];
 
-            updateNames = new List<string>();
-            webNames = new List<string>();
-            startNames = new List<string>();
-            stopNames = new List<string>();
+            updateNames = [];
+            webNames = [];
+            startNames = [];
+            stopNames = [];
 
             string behaviorsText = string.Empty;
             Type[] types = Assembly.GetCallingAssembly().GetTypes();
@@ -311,7 +311,7 @@ namespace Jarvis.API
                         };
                         string json = JsonConvert.SerializeObject(dto);
                         StringContent jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
-                        return (await client.PostAsync(responseUrl, jsonContent)).IsSuccessStatusCode;
+                        return (await client.PostAsync(singleton?.responseUrl, jsonContent)).IsSuccessStatusCode;
                     }
                     else
                     {
@@ -342,7 +342,7 @@ namespace Jarvis.API
             /// <returns>An asyncronous task for this function</returns>
             public static async Task<bool> ConsumeCmd()
             {
-                string delUrl = cmdUrl + "/" + singleton?.BladeName;
+                string delUrl = singleton?.cmdUrl + "/" + singleton?.BladeName;
                 return (await client.DeleteAsync(delUrl)).IsSuccessStatusCode;
             }
         }

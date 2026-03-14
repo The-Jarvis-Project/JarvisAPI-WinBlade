@@ -34,8 +34,8 @@
             Text = text;
             string[] split = text.Split(Sentence.separators, StringSplitOptions.RemoveEmptyEntries);
             Sentences = new Sentence[split.Length];
-            List<Phrase> phraseList = new List<Phrase>();
-            List<Word> wordList = new List<Word>();
+            List<Phrase> phraseList = [];
+            List<Word> wordList = [];
             for (int i = 0; i < split.Length; i++)
             {
                 Sentences[i] = new Sentence(split[i]);

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.Maui
 
 namespace Jarvis.API
 {
@@ -13,6 +14,7 @@ namespace Jarvis.API
         /// <param name="msg">The message to log</param>
         public static void Info(string msg)
         {
+            //MainThread.
             Debug.WriteLine("Info: " + msg);
             Debug.Flush();
         }
